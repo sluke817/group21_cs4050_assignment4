@@ -11,13 +11,6 @@ public class MstEdge implements Comparable<MstEdge>{
 
     @Override
     public int compareTo(MstEdge o) {
-        if(weight < o.weight) {
-            return -1;
-        } else if (weight > o.weight) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
+        return Double.compare(weight, o.weight);
     }
 }
