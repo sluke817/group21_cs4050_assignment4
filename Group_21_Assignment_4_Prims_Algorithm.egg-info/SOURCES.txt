@@ -1,8 +1,0 @@
-README.md
-setup.cfg
-setup.py
-Group_21_Assignment_4_Prims_Algorithm.egg-info/PKG-INFO
-Group_21_Assignment_4_Prims_Algorithm.egg-info/SOURCES.txt
-Group_21_Assignment_4_Prims_Algorithm.egg-info/dependency_links.txt
-Group_21_Assignment_4_Prims_Algorithm.egg-info/requires.txt
-Group_21_Assignment_4_Prims_Algorithm.egg-info/top_level.txt
