@@ -2,6 +2,7 @@ import click
 from src.graph import UndirectedGraph
 from src.prims import prims_algorithm
 
+# simple CLI to allow quick running of the program
 
 @click.command()
 @click.option("--graph-file", default="input/graph", help="Input graph file.")

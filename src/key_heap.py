@@ -85,6 +85,7 @@ class KeyHeap:
             self.heapify_up(starting_index=smallest_index)
 
     def insert(self, key: Any, id: int) -> None:  # O(logn)
+        # put it at the end, then heapify from end
         if id not in self.id_set:
             self.id_set[id] = len(self.heap_arr) - 1
             self.heap_arr.append(KeyHeapElement(key=key, id=id))
@@ -95,8 +96,8 @@ class KeyHeap:
     # A4 Doc Functions !!!
 
     def heap_ini(self, keys: list[Any], n: int) -> None:  # O(nlogn)
-        for i in range(len(keys)):
-            self.insert(key=keys[i], id=i + 1)
+        for i in range(len(keys)): # O(n)
+            self.insert(key=keys[i], id=i + 1) # O(logn)
 
     def in_heap(self, id: int) -> bool:  # O(1)
         return True if id in self.id_set else False
@@ -107,7 +108,7 @@ class KeyHeap:
         else:
             return None
 
-    def min_id(self) -> int:  # O(n)
+    def min_id(self) -> int:  # O(1)
         if len(self.heap_arr) > 0:
             return self.heap_arr[0].id
         else:
@@ -126,14 +127,10 @@ class KeyHeap:
             self.heapify_up(starting_index=0)  # re-heapify the heap
 
     def decrease_key(self, id: int, new_key: Any) -> bool:  # O(logn)
+        # update only if smaller, then bubble the smallest to the front of the heap
         if id in self.id_set and self.heap_arr[self.id_set[id]].key > new_key:
             self.heap_arr[self.id_set[id]].key = new_key
-            self.swap(
-                self.id_set[id], len(self.heap_arr) - 1
-            )  # swap element and last element
-            self.heapify_down(
-                starting_index=len(self.heap_arr) - 1
-            )  # heapify from the end
+            self.heapify_down(starting_index=self.id_set[id])  # heapify down to beginning of heap
             return True
         else:
             return False
