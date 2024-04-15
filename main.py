@@ -30,6 +30,7 @@ def run_prims(graph_file):
     print()
 
     print("MST:")
+    mst.visualize_graph()
     mst.print_graph()
 
 
