@@ -25,12 +25,12 @@ def run_prims(graph_file):
     print("Initial Graph:")
     og_graph.print_graph()
 
-    mst = prims_algorithm(og_graph, num_verticies)
+    mst: dict[int, int] = prims_algorithm(og_graph, num_verticies)
 
     print()
 
-    print("MST:")
-    mst.print_graph()
+    print("MST Edgelist:")
+    og_graph.print_mst(mst)
 
 
 if __name__ == "__main__":
