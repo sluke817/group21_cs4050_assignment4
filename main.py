@@ -1,8 +1,9 @@
 import click
-from src.graph import UndirectedGraph
+from src.graph import UndirectedGraph, MST
 from src.prims import prims_algorithm
 
 # simple CLI to allow quick running of the program
+
 
 @click.command()
 @click.option("--graph-file", default="input/graph", help="Input graph file.")
@@ -25,12 +26,12 @@ def run_prims(graph_file):
     print("Initial Graph:")
     og_graph.print_graph()
 
-    mst: dict[int, int] = prims_algorithm(og_graph, num_verticies)
+    mst: MST = prims_algorithm(og_graph, num_verticies)
 
     print()
 
     print("MST Edgelist:")
-    og_graph.print_mst(mst)
+    mst.print_edges()
 
 
 if __name__ == "__main__":

@@ -31,8 +31,12 @@ class KeyHeap:
     # Helper functions
 
     def __init__(self):
-        self.heap_arr: list[KeyHeapElement] = [] # heap array representation
-        self.id_set: dict[int, int] = {} # keeps track of the id value and the current index of the id in the heap (allows key() to have O(1) access time)
+        self.heap_arr: list[KeyHeapElement] = []  # heap array representation
+        self.id_set: dict[
+            int, int
+        ] = (
+            {}
+        )  # keeps track of the id value and the current index of the id in the heap (allows key() to have O(1) access time)
 
     def swap(self, heapIndexA, heapIndexB) -> None:  # O(1)
         # update indexes in the id set
@@ -57,7 +61,7 @@ class KeyHeap:
     def heapify_down(self, starting_index: int) -> None:  # O(logn)
         # while the parent is larger than the child, swap them
         child_index: int = starting_index
-        parent_index: int = int(starting_index // 2) # floor division
+        parent_index: int = int(starting_index // 2)  # floor division
         last_index = len(self.heap_arr) - 1
 
         if (
@@ -105,8 +109,8 @@ class KeyHeap:
     # A4 Doc Functions !!!
 
     def heap_ini(self, keys: list[Any], n: int) -> None:  # O(nlogn)
-        for i in range(len(keys)): # O(n)
-            self.insert(key=keys[i], id=i + 1) # O(logn)
+        for i in range(len(keys)):  # O(n)
+            self.insert(key=keys[i], id=i + 1)  # O(logn)
 
     def in_heap(self, id: int) -> bool:  # O(1)
         return True if id in self.id_set else False
@@ -133,7 +137,7 @@ class KeyHeap:
         if len(self.heap_arr) > 0:
             self.swap(0, len(self.heap_arr) - 1)  # swap the first and last element
             deleted_element = self.heap_arr.pop()  # remove the last element
-            self.id_set.pop(deleted_element.id) # remove from index set
+            self.id_set.pop(deleted_element.id)  # remove from index set
             self.heapify_up(starting_index=0)  # re-heapify the heap
 
     def decrease_key(self, id: int, new_key: Any) -> None:  # O(logn)
@@ -141,7 +145,8 @@ class KeyHeap:
         if id in self.id_set:
             if new_key < self.heap_arr[self.id_set[id]].key:
                 self.heap_arr[self.id_set[id]].key = new_key
-                self.heapify_down(starting_index=self.id_set[id])  # heapify down to beginning of heap
+                self.heapify_down(
+                    starting_index=self.id_set[id]
+                )  # heapify down to beginning of heap
         else:
             raise KeyHeapException(f"ID {id} does not exist in heap!")
-            
