@@ -2,6 +2,7 @@ import sys
 from .graph import UndirectedGraph, MST
 from .key_heap import KeyHeap, KeyHeapException
 
+
 # numbers the verticies [0, num_verticies - 1]
 def prims_algorithm(graph: UndirectedGraph, num_verticies: int) -> MST:
 
@@ -28,14 +29,14 @@ def prims_algorithm(graph: UndirectedGraph, num_verticies: int) -> MST:
         vertex_heap.delete_min()  # pop it from the heap, it's now been seen O(logv)
         for adjacent_vertex, weight in graph.get_adjacent_set(
             min_vertex
-        ).items():  # get the adjacent verticies and their corresponding weights for each edge, O(e)
+        ).items():  # iterate over each of the adjacent verticies and their corresponding weights for each edge, O(e)
             try:
-                if adjacent_vertex not in mst_set:
-                    if vertex_heap.key(id=adjacent_vertex) > weight:
+                if adjacent_vertex not in mst_set: # only update verticies not already in MST
+                    if vertex_heap.key(id=adjacent_vertex) > weight: # if the key in the heap is larger than what we found in the graph, update the heap and the MST
                         vertex_heap.decrease_key(
                             id=adjacent_vertex, new_key=weight
                         )  # O(logv)
-                        mst.update_edge(adjacent_vertex, min_vertex, weight)  # O(1)
+                        mst.update_edge(adjacent_vertex, min_vertex, weight)  # O(1), updates the 'parent' of the adjacent vertex with the current vertex edge weight
             except KeyHeapException:
                 pass
     return mst

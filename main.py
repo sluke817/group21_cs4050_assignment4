@@ -8,9 +8,11 @@ from src.prims import prims_algorithm
 @click.command()
 @click.option("--graph-file", default="input/graph", help="Input graph file.")
 def run_prims(graph_file):
+
+    # initialize original graph from file input
     og_graph = UndirectedGraph()
     num_verticies = 0
-    with open(graph_file, "r") as file:
+    with open(graph_file, "r") as file: # O(e)
         num_verticies = int(file.readline())
         for line in file:
             numbers = [float(num) for num in line.split()]
@@ -26,6 +28,7 @@ def run_prims(graph_file):
     print("Initial Graph:")
     og_graph.print_graph()
 
+    # run the prims algorithm to build the MST
     mst: MST = prims_algorithm(og_graph, num_verticies)
 
     print()

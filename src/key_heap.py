@@ -1,13 +1,5 @@
 from typing import Any
 
-"""
-Notes on KeyHeap and complexity:
-    - Type/class used for KeyHeap must implement __gt__ function! (All primitive types already do this, Python does not have compareTo)
-    - len() function = O(1)
-    - in operator on dictionary has average O(1) time (Python hashes it's dictionaries), where O(n) complexity on lists
-    - min() = O(n)
-"""
-
 # Helper classes
 
 
@@ -48,7 +40,7 @@ class KeyHeap:
         self.heap_arr[heapIndexA] = self.heap_arr[heapIndexB]
         self.heap_arr[heapIndexB] = tmp
 
-    def print_heap(self):
+    def print_heap(self): # debugging helper
         print("Current heap order: ")
         for element in self.heap_arr:
             print(element)
@@ -64,6 +56,7 @@ class KeyHeap:
         parent_index: int = int(starting_index // 2)  # floor division
         last_index = len(self.heap_arr) - 1
 
+        # if the parent is larger, swap and keep heapifying towards start
         if (
             child_index < last_index
             and child_index >= 0
@@ -80,6 +73,7 @@ class KeyHeap:
         left = starting_index * 2
         right = starting_index * 2 + 1
 
+        # find the smallest of the 3 (parent, left, right)
         if (
             smallest_index <= last_index
             and left <= last_index
@@ -93,6 +87,7 @@ class KeyHeap:
         ):
             smallest_index = right
 
+        # if smallest is not the parent (starting_index), swap for smallest and keep heapifying
         if smallest_index != starting_index:
             self.swap(smallest_index, starting_index)
             self.heapify_up(starting_index=smallest_index)

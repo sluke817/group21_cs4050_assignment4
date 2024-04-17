@@ -12,11 +12,11 @@ pip install -r requirements.txt
 
 # Run
 
-To run the application, run the below command from the project root directory
+To run the application, run the below command from the project root directory. No flag value defaults to input/graph
 ```bash
 python3 main.py --graph-file=input/graph
 ```
 
 # See More
 
-For more documentation and notes, please visit the docs folder
+For more documentation and notes, please visit the docs folder. Located there is a .md that describes the time complexity of our assignment.

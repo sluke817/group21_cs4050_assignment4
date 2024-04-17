@@ -1,21 +1,22 @@
 # Graph structure to assist in simplifying graph logic
 
-
+# Helper class for clarity
 class Edge:
     def __init__(self, dst: int, src: int, weight: float):
         self.dst = dst
         self.src = src
         self.weight = weight
 
-
+# Helper for debugging and errors
 class GraphExeption(Exception):
     def __init__(self, message="An invalid graph operation occured!"):
         self.message = message
         super().__init__(self.message)
 
 
+# ended up not using all of these functions in prims, but some were helpful for debugging
 class UndirectedGraph:
-    def __init__(self):
+    def __init__(self): # O(1)
         self.vertex_set: dict[int, dict[int, float]] = {}
         self.edge_list: list[Edge] = []
 
@@ -50,27 +51,22 @@ class UndirectedGraph:
         for vertex, adjacent_list in self.vertex_set.items():
             print(f"{vertex}\t{adjacent_list}")
 
-    def print_edges(self):
+    def print_edges(self): # O(e)
         print(f"Number of Edges: {len(self.edge_list)}")
         print("Edge\tWeight")
         for edge in self.edge_list:
             print(f"{edge.src}-{edge.dst}\t{edge.weight}")
 
-    def print_mst(self, parent_dict: dict[int, int]) -> None:
-        print(f"Number of Edges: {len(parent_dict)}")
-        print("Edge\tWeight")
-        for src, dst in parent_dict.items():
-            print(f"{src}-{dst}\t{self.vertex_set[src][dst]}")
 
-
+# a way to simplify output and abstract MST operations
 class MST:
-    def __init__(self):
+    def __init__(self): # O(1)
         self.edge_dict = {}
 
-    def update_edge(self, va, vb, w) -> None:
+    def update_edge(self, va, vb, w) -> None: # updates the 'parent' relationship O(1) between va(child) and vb (parent) with a weight cost between the parent and child (w)
         self.edge_dict[va] = (vb, w)
 
-    def print_edges(self):
+    def print_edges(self): # O(e)
         print(f"Number of Edges: {len(self.edge_dict)}")
         print("Edge\tWeight")
         for va in self.edge_dict:
